@@ -1,6 +1,6 @@
 package com.shutterstock.imggetter.android.categories
 
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +10,7 @@ import com.shutterstock.imggetter.R
 class CategoriesAdapter(
     private var categories: List<CategoryModel>,
     private val listener: CategoryListener
-) : RecyclerView.Adapter<CategoryViewHolder>() {
+) : androidx.recyclerview.widget.RecyclerView.Adapter<CategoryViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, p1: Int): CategoryViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(
             R.layout.item_category, parent, false
@@ -33,7 +33,7 @@ class CategoriesAdapter(
 class CategoryViewHolder(
     itemView: View,
     private val listener: CategoryListener
-) : RecyclerView.ViewHolder(itemView) {
+) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
     fun bind(category: CategoryModel) {
         with(itemView.findViewById<TextView>(R.id.categoryTitleTextView)) {
             text = category.name

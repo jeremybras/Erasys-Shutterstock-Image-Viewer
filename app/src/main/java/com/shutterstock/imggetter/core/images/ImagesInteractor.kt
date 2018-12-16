@@ -17,14 +17,4 @@ class ImagesInteractor(
 
         }
     }
-
-//    fun query(category: String, query: String, firstLoading: Boolean) {
-//        try {
-//            repository.query(category, query, firstLoading)?.let {
-//                presenter.presentImages(it)
-//            } ?: presenter.presentNoImageFound()
-//        } catch (exception: RepositoryException) {
-//
-//        }
-//    }
 }

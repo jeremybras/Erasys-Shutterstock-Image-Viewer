@@ -37,24 +37,6 @@ class ImagesApiRepository(
         }
     }
 
-//    override fun query(category: String, query: String, firstLoading: Boolean): List<Image>? {
-//        if (firstLoading) {
-//            page = INIT_PAGE
-//        }
-//        try {
-//            service.getImages(
-//                category = category,
-//                query = query,
-//                perPage = 20,
-//                page = 1
-//            ).execute().body()?.let {
-//                return transformToEntity(it.data)
-//            } ?: throw RepositoryException()
-//        } catch (io: IOException) {
-//            throw RepositoryException(cause = io)
-//        }
-//    }
-
     private fun transformToEntity(data: List<ImageJson>): List<Image> {
         return data.map {
             Image(

@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.res.Resources
 import dagger.Module
 import dagger.Provides
-import org.threeten.bp.Clock
 import timber.log.Timber
 import java.util.concurrent.Executor
 import java.util.concurrent.Executors
@@ -37,11 +36,5 @@ class MainModule(private val context: Context) {
     @Provides
     fun provideTimber(): Timber.Tree {
         return Timber.asTree()
-    }
-
-    @Provides
-    @Singleton
-    fun provideClock(): Clock {
-        return Clock.systemDefaultZone()
     }
 }

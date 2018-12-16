@@ -1,15 +1,15 @@
 package com.shutterstock.imggetter.android.images
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
-import android.support.v4.content.ContextCompat
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.SearchView
+import androidx.core.content.ContextCompat
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.appcompat.widget.SearchView
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
@@ -52,11 +52,11 @@ class ImagesActivity : AppCompatActivity(), ImageListener, OnBottomReachedListen
         supportActionBar?.setDisplayShowHomeEnabled(true)
 
         imagesAdapter = ImagesAdapter(emptyList(), this, this)
-        imagesRecyclerView.layoutManager = LinearLayoutManager(this)
+        imagesRecyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this)
         imagesRecyclerView.adapter = imagesAdapter
 
         queryAdapter = ImagesAdapter(emptyList(), this, this)
-        queryRecyclerView.layoutManager = LinearLayoutManager(this)
+        queryRecyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this)
         queryRecyclerView.adapter = queryAdapter
 
         intent.getStringExtra(EXTRA_CATEGORY)?.let { category ->

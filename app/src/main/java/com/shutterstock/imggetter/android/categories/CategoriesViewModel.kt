@@ -1,8 +1,8 @@
 package com.shutterstock.imggetter.android.categories
 
-import android.arch.lifecycle.LifecycleObserver
-import android.arch.lifecycle.MutableLiveData
-import android.arch.lifecycle.ViewModel
+import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.shutterstock.imggetter.android.SingleLiveEvent
 
 class CategoriesViewModel(

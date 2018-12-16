@@ -1,8 +1,8 @@
 package com.shutterstock.imggetter.android.images
 
-import android.support.constraint.ConstraintLayout
-import android.support.constraint.ConstraintSet
-import android.support.v7.widget.RecyclerView
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.constraintlayout.widget.ConstraintSet
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,7 +16,7 @@ class ImagesAdapter(
     private var images: List<Image>,
     private val onClickListener: ImageListener,
     private val onBottomListener: OnBottomReachedListener
-) : RecyclerView.Adapter<PhotoViewHolder>() {
+) : androidx.recyclerview.widget.RecyclerView.Adapter<PhotoViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, p1: Int): PhotoViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(
@@ -43,7 +43,7 @@ class ImagesAdapter(
 class PhotoViewHolder(
     itemView: View,
     private val listener: ImageListener
-) : RecyclerView.ViewHolder(itemView) {
+) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
     fun bind(image: Image) {
         val imageView = itemView.findViewById<ImageView>(R.id.shutterStockImageView)
 

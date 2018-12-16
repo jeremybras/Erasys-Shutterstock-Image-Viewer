@@ -1,6 +1,6 @@
 package com.shutterstock.imggetter.android.categories
 
-import android.support.annotation.StringRes
+import androidx.annotation.StringRes
 import com.octo.workerdecorator.annotation.Decorate
 
 @Decorate(weak = true, mutable = true)

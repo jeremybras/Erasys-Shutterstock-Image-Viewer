@@ -12,12 +12,6 @@ interface ImagesController {
 class ImagesControllerImpl(
     private val interactor: ImagesInteractor
 ) : ImagesController {
-//    override fun query(category: String, query: String, firstLoading: Boolean) {
-//        if (query.isNotEmpty()) {
-//            interactor.query(category, query, firstLoading)
-//        }
-//    }
-
     override fun loadImages(category: String, query: String, firstLoading: Boolean) {
         interactor.loadImages(category, query, firstLoading)
     }

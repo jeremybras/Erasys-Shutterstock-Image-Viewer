@@ -1,10 +1,10 @@
 package com.shutterstock.imggetter.android.categories
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.widget.Toast
 import com.shutterstock.imggetter.R
 import com.shutterstock.imggetter.android.ImgGetterApplication
@@ -33,7 +33,9 @@ class CategoriesActivity : AppCompatActivity(), CategoryListener {
         setContentView(R.layout.activity_categories)
 
         adapter = CategoriesAdapter(emptyList(), this)
-        categoriesRecyclerView.layoutManager = LinearLayoutManager(this)
+        categoriesRecyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(
+            this
+        )
         categoriesRecyclerView.adapter = adapter
 
         initializeViewModelObservers()
