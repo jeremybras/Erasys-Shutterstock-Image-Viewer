@@ -12,11 +12,25 @@
         android:background="@color/colorPrimary"
         android:elevation="4dp" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/imagesRecyclerView"
+    <ViewFlipper
+        android:id="@+id/modeViewFlipper"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:clipToPadding="false"
-        android:paddingBottom="8dp" />
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/imagesRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingBottom="8dp" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/queryRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingBottom="8dp" />
+
+    </ViewFlipper>
 
 </LinearLayout>

@@ -8,7 +8,8 @@ interface ImagesService {
     @GET("images/search")
     fun getImages(
         @Query("category") category: String,
-        @Query("query") query: String = "",
-        @Query("per_page") perPage: Int = 200
+        @Query("page") page: Int,
+        @Query("per_page") perPage: Int,
+        @Query("query") query: String
     ): Call<ImagesRootJson>
 }

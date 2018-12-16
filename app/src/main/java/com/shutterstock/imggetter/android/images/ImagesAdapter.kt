@@ -14,20 +14,24 @@ import timber.log.Timber
 
 class ImagesAdapter(
     private var images: List<Image>,
-    private val listener: ImageListener
+    private val onClickListener: ImageListener,
+    private val onBottomListener: OnBottomReachedListener
 ) : RecyclerView.Adapter<PhotoViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, p1: Int): PhotoViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(
             R.layout.item_image, parent, false
         )
-        return PhotoViewHolder(view, listener)
+        return PhotoViewHolder(view, onClickListener)
     }
 
     override fun getItemCount(): Int = images.size
 
     override fun onBindViewHolder(holder: PhotoViewHolder, position: Int) {
         holder.bind(images[position])
+        if (position == images.size - 10) {
+            onBottomListener.onBottomReached()
+        }
     }
 
     fun updateData(images: List<Image>) {
@@ -41,7 +45,6 @@ class PhotoViewHolder(
     private val listener: ImageListener
 ) : RecyclerView.ViewHolder(itemView) {
     fun bind(image: Image) {
-//        Timber.d(image.url)
         val imageView = itemView.findViewById<ImageView>(R.id.shutterStockImageView)
 
         Picasso.get().load(image.url).into(imageView)
@@ -58,4 +61,8 @@ class PhotoViewHolder(
 
 interface ImageListener {
     fun onImageClicked(image: Image)
+}
+
+interface OnBottomReachedListener {
+    fun onBottomReached()
 }

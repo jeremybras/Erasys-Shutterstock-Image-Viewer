@@ -21,13 +21,16 @@ import kotlinx.android.synthetic.main.activity_images.*
 import javax.inject.Inject
 
 
-class ImagesActivity : AppCompatActivity(), ImageListener {
+class ImagesActivity : AppCompatActivity(), ImageListener, OnBottomReachedListener {
 
     @Inject lateinit var factory: ViewModelFactory<ImagesViewModel>
     private lateinit var viewModel: ImagesViewModel
-    private lateinit var adapter: ImagesAdapter
+    private lateinit var imagesAdapter: ImagesAdapter
+    private lateinit var queryAdapter: ImagesAdapter
 
     companion object {
+        private const val DISPLAY_IMAGES = 0
+        private const val DISPLAY_QUERY = 1
         private const val EXTRA_CATEGORY = "EXTRA_CATEGORY"
 
         fun newIntent(context: Context, category: String): Intent {
@@ -48,9 +51,13 @@ class ImagesActivity : AppCompatActivity(), ImageListener {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
 
-        adapter = ImagesAdapter(emptyList(), this)
+        imagesAdapter = ImagesAdapter(emptyList(), this, this)
         imagesRecyclerView.layoutManager = LinearLayoutManager(this)
-        imagesRecyclerView.adapter = adapter
+        imagesRecyclerView.adapter = imagesAdapter
+
+        queryAdapter = ImagesAdapter(emptyList(), this, this)
+        queryRecyclerView.layoutManager = LinearLayoutManager(this)
+        queryRecyclerView.adapter = queryAdapter
 
         intent.getStringExtra(EXTRA_CATEGORY)?.let { category ->
             viewModel.setCategory(category)
@@ -65,6 +72,7 @@ class ImagesActivity : AppCompatActivity(), ImageListener {
         val item = menu.findItem(R.id.search)
         (item?.actionView as SearchView).setOnQueryTextListener(object: SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
+                modeViewFlipper.displayedChild = DISPLAY_QUERY
                 viewModel.query(query)
                 return true
             }
@@ -83,7 +91,8 @@ class ImagesActivity : AppCompatActivity(), ImageListener {
                 toolbar.setBackgroundColor(
                     ContextCompat.getColor(baseContext, R.color.colorPrimary)
                 )
-                viewModel.loadImages()
+                modeViewFlipper.displayedChild = DISPLAY_IMAGES
+                viewModel.loadImages(true)
                 return true
             }
         })
@@ -99,12 +108,25 @@ class ImagesActivity : AppCompatActivity(), ImageListener {
         Toast.makeText(this, "Clicked on image ${image.id}", Toast.LENGTH_LONG).show()
     }
 
+    override fun onBottomReached() {
+        if (isInQueryMode()) {
+            viewModel.loadQuery()
+        } else {
+            viewModel.loadImages()
+        }
+    }
+
     private fun initializeViewModelObservers() {
         viewModel.images.observe(this, Observer {
             it?.let { images ->
-                adapter.updateData(images)
-                Toast.makeText(this, "Found ${images.size} images", Toast.LENGTH_LONG).show()
+                if (isInQueryMode()) {
+                    queryAdapter.updateData(images)
+                } else {
+                    imagesAdapter.updateData(images)
+                }
             }
         })
     }
+
+    private fun isInQueryMode() = modeViewFlipper.displayedChild == DISPLAY_QUERY
 }

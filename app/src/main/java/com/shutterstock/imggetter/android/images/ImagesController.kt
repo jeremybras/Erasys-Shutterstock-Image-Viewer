@@ -5,20 +5,20 @@ import com.shutterstock.imggetter.core.images.ImagesInteractor
 
 @Decorate
 interface ImagesController {
-    fun loadImages(category: String)
-    fun query(category: String, query: String)
+    fun loadImages(category: String, query: String, firstLoading: Boolean)
+//    fun query(category: String, query: String, firstLoading: Boolean)
 }
 
 class ImagesControllerImpl(
     private val interactor: ImagesInteractor
 ) : ImagesController {
-    override fun query(category: String, query: String) {
-        if (query.isNotEmpty()) {
-            interactor.query(category, query)
-        }
-    }
+//    override fun query(category: String, query: String, firstLoading: Boolean) {
+//        if (query.isNotEmpty()) {
+//            interactor.query(category, query, firstLoading)
+//        }
+//    }
 
-    override fun loadImages(category: String) {
-        interactor.loadImages(category)
+    override fun loadImages(category: String, query: String, firstLoading: Boolean) {
+        interactor.loadImages(category, query, firstLoading)
     }
 }

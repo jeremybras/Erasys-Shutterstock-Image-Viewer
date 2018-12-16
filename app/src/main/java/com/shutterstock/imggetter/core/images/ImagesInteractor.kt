@@ -8,9 +8,9 @@ class ImagesInteractor(
     private val presenter: ImagesPresenter,
     private val repository: ImagesRepository
 ) {
-    fun loadImages(category: String) {
+    fun loadImages(category: String, query: String, firstLoading: Boolean) {
         try {
-            repository.loadImages(category)?.let {
+            repository.loadImages(category, query, firstLoading)?.let {
                 presenter.presentImages(it)
             } ?: presenter.presentNoImageFound()
         } catch (exception: RepositoryException) {
@@ -18,13 +18,13 @@ class ImagesInteractor(
         }
     }
 
-    fun query(category: String, query: String) {
-        try {
-            repository.query(category, query)?.let {
-                presenter.presentImages(it)
-            } ?: presenter.presentNoImageFound()
-        } catch (exception: RepositoryException) {
-
-        }
-    }
+//    fun query(category: String, query: String, firstLoading: Boolean) {
+//        try {
+//            repository.query(category, query, firstLoading)?.let {
+//                presenter.presentImages(it)
+//            } ?: presenter.presentNoImageFound()
+//        } catch (exception: RepositoryException) {
+//
+//        }
+//    }
 }
